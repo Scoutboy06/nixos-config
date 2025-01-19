@@ -8,7 +8,8 @@
 
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
-      tmuxPlugins.nord
+      tmuxPlugins.tokyo-night-tmux
+      # tmuxPlugins.nord
       # tmuxPlugins.catppuccin
       # tmuxPlugins.sensible
       # tmuxPlugins.vim-tmux-navigator
@@ -22,24 +23,12 @@
       # set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
 
-        # Nord theme configuration
-  set -g status-style bg=colour235,fg=colour255
-  set -g message-style bg=colour235,fg=colour4
-  set -g pane-border-style fg=colour235
-  set -g pane-active-border-style fg=colour6
-  set -g status-left-length 100
-  set -g status-right-length 100
-  set -g status-interval 5
-
-  set -g status-left "#[fg=colour255,bg=colour235,bold] #S #[fg=colour235,bg=colour236,nobold,nounderscore,noitalics]"
-  set -g status-right "#[fg=colour236,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour255,bg=colour236] %H:%M  %d %b #[fg=colour240,bg=colour236,nobold,nounderscore,noitalics]#[fg=colour230,bg=colour240] #h "
-  set -g status-justify centre
-  set -g status-left-style none
-  set -g status-right-style none
-  set -g status-style none
-
-  set-window-option -g window-status-current-format "#[fg=colour255,bg=colour236,bold] #I #[fg=colour255,bg=colour236,nobold,nounderscore,noitalics]#[fg=colour255,bg=colour235] #W #[fg=colour236,bg=colour235,nobold,nounderscore,noitalics]"
-  set-window-option -g window-status-format "#[fg=colour255,bg=colour235] #I #[fg=colour255,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour255,bg=colour235] #W #[fg=colour235,bg=colour235,nobold,nounderscore,noitalics]"
+      # Configure Tokyo Night theme
+      set -g @tokyo-night-tmux_theme storm
+      set -g @tokyo-night-tmux_transparent 1
+      set -g @tokyo-night-tmux_show_datetime 1
+      set -g @tokyo-night-tmux_date_format YMD
+      set -g @tokyo-night-tmux_time_format 24H
 
       set -g mouse on
       bind -n M-h select-pane -L
