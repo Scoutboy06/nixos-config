@@ -1,5 +1,4 @@
-{ pkgs, config, ... }:
-{
+{ pkgs, config, ... }: {
   programs.tmux = {
     enable = true;
     prefix = "C-b";
@@ -22,6 +21,12 @@
       # set -ga terminal-overrides ",*256col*:Tc"
       # set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
+
+      # Transparent background
+      set -g pane-active-border-style bg=color0
+      set -g pane-border-style bg=color0
+      set-window-option -g window-active-style bg=terminal
+      set-window-option -g window-style bg=color0
 
       # Configure Tokyo Night theme
       set -g @tokyo-night-tmux_theme storm

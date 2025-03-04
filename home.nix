@@ -1,35 +1,37 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./modules/tmux.nix
-  ];
+  imports = [ ./modules/tmux.nix ];
 
   home.username = "elias";
   home.homeDirectory = "/home/elias";
   home.stateVersion = "24.11"; # Please read the documentation before changing.
 
-  programs.starship = {
-    enable = true;
-  };
+  programs.starship = { enable = true; };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
+    enableCompletion = true;
+    # autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       la = "ls -a";
       ll = "ls -al";
       cl = "clear";
+      update =
+        "sudo nixos-rebuild switch --flake ~/nixos-config#elias --impure";
     };
+    history.size = 10000;
   };
 
   programs.helix = {
     enable = true;
     settings = {
-      theme = "autumt_night_transparent";
+      theme = "autumn_night_transparent";
       editor.cursor-shape = {
         normal = "block";
-	insert = "bar";
-	select = "underline";
+        insert = "bar";
+        select = "underline";
       };
     };
     languages.language = [{
@@ -40,7 +42,7 @@
     themes = {
       autumn_night_transparent = {
         "inherits" = "autumt_night";
-	"ui.background" = { };
+        "ui.background" = { };
       };
     };
   };
@@ -50,14 +52,9 @@
     nix-direnv.enable = true;
   };
 
-  home.packages = with pkgs; [
-    htop
-    tree
-  ];
+  home.packages = with pkgs; [ htop tree ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.home-manager.enable = true;
 }
