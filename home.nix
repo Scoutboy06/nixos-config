@@ -25,10 +25,12 @@
   home.packages = with pkgs; [
     htop
     tree
+    direnv
   ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
   programs.home-manager.enable = true;
 }

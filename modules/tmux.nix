@@ -28,7 +28,7 @@
       set -g @tokyo-night-tmux_transparent 1
       set -g @tokyo-night-tmux_show_datetime 1
       set -g @tokyo-night-tmux_date_format YMD
-      set -g @tokyo-night-tmux_time_format 24H
+      set -g @tokyo-night-tmux_time_format 12H
 
       set -g mouse on
       bind -n M-h select-pane -L
@@ -38,7 +38,7 @@
 
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
-      bind c new-window -c "#{pane_current_path}"
+      # bind c new-window -c "#{pane_current_path}"
     '';
   };
 }
