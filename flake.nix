@@ -16,27 +16,23 @@
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }:
-  let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs { inherit system; };
-  in
-  {
-    nixosConfigurations.elias = nixpkgs.lib.nixosSystem {
-      system = system;
-      modules = [
-        ./configuration.nix
-        nixos-wsl.nixosModules.default
-	home-manager.nixosModules.default
-      ];
-    };
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in {
+      nixosConfigurations.elias = nixpkgs.lib.nixosSystem {
+        system = system;
+        modules = [
+          ./configuration.nix
+          nixos-wsl.nixosModules.default
+          home-manager.nixosModules.default
+        ];
+      };
 
-    homeConfigurations.elias = home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgs;
+      homeConfigurations.elias = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs;
 
-      modules = [
-        ./home.nix
-      ];
+        modules = [ ./home.nix ];
+      };
     };
-  };
 }
-

@@ -22,10 +22,37 @@
     };
   };
 
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "autumt_night_transparent";
+      editor.cursor-shape = {
+        normal = "block";
+	insert = "bar";
+	select = "underline";
+      };
+    };
+    languages.language = [{
+      name = "nix";
+      auto-format = true;
+      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+    }];
+    themes = {
+      autumn_night_transparent = {
+        "inherits" = "autumt_night";
+	"ui.background" = { };
+      };
+    };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   home.packages = with pkgs; [
     htop
     tree
-    direnv
   ];
 
   home.sessionVariables = {
