@@ -50,7 +50,7 @@ username, hostname, pkgs, inputs, ... }: {
     wslConf.interop.appendWindowsPath = false;
     wslConf.network.generateHosts = false;
     defaultUser = username;
-    starMenuLaunchers = true;
+    startMenuLaunchers = true;
 
     # Enable integration with Docker Desktop (needs to be installed)
     # docker-desktop.enable = false;
