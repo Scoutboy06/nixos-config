@@ -209,7 +209,9 @@ in {
     helix = {
       enable = true;
       settings = {
-        theme = "autumn_night_transparent";
+        # theme = "tokyonight";
+        theme = "base16_terminal";
+        editor.line-number = "relative";
         editor.cursor-shape = {
           normal = "block";
           insert = "bar";
@@ -221,11 +223,18 @@ in {
         auto-format = true;
         formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
       }];
-      themes = {
-        autumn_night_transparent = {
-          "inherits" = "autumt_night";
-          "ui.background" = { };
+      themes.base16_terminal = {
+        "ui.background" = { fg = "foreground"; };
+        "ui.cursor" = {
+          fg = "background";
+          bg = "blue";
+          modifiers = [ "dim" ];
         };
+        "ui.cursor.match" = {
+          fg = "green";
+          modifiers = [ "underlined" ];
+        };
+        "ui.selection" = { bg = "secondary_highlight"; };
       };
     };
 
@@ -246,7 +255,7 @@ in {
         #   "https://oauth2:${secrets.github_token}@github.com" = {
         #     insteadOf = "https://github.com";
         #   };
-        #   "https://oauth2:${secrets.github_token}@github.com" = {
+        #   "https://oauth2:${secrets.gitlab_token}@github.com" = {
         #     insteadOf = "https://gitlab.com";
         #   };
         # };
@@ -262,8 +271,6 @@ in {
     # FIXME: This is my fish config - you can fiddle with it if you want
     fish = {
       enable = true;
-      # FIXME run 'scoop install win32yank' on Windows, then add this line with your Windows username to the bottom of interactiveShellInit
-      # fish_add_path --append /mnt/c/Users/<Your Windows Username>/scoop/apps/win32yank/0.1.1
       interactiveShellInit = ''
         ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
 
@@ -275,6 +282,12 @@ in {
         } + "/extras/kanagawa.fish")}
 
         set -U fish_greeting
+
+        set -Ux COLORTERM truecolor
+
+        # FIXME: run 'scoop install win32yank' on Windows, then add this line with your Windows username to the bottom of interactiveShellInit
+        # FIXME: update windows username
+        fish_add_path --append /mnt/c/Users/elias/scoop/apps/win32yank/0.1.1
       '';
       functions = {
         refresh = "source $HOME/.config/fish/config.fish";
