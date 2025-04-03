@@ -20,7 +20,6 @@ username, hostname, pkgs, inputs, ... }: {
 
   users.users.${username} = {
     isNormalUser = true;
-    # FIXME: change your shell here if you don't want fish
     shell = pkgs.fish;
     extraGroups = [
       "wheel"
@@ -39,6 +38,11 @@ username, hostname, pkgs, inputs, ... }: {
     imports = [
       #
       ./home.nix
+      # ./modules/tmux.nix
+      # ./modules/fish.nix
+      # ./modules/helix.nix
+      # ./modules/starship.nix
+      # ./modules/git.nix
     ];
   };
 
@@ -62,7 +66,6 @@ username, hostname, pkgs, inputs, ... }: {
     autoPrune.enable = true;
   };
 
-  # FIXME: uncomment the next block to make vscode running in Windows "just work" with NixOS on WSL
   # solution adapted from: https://github.com/K900/vscode-remote-workaround
   # more information: https://github.com/nix-community/NixOS-WSL/issues/238 and https://github.com/nix-community/NixOS-WSL/issues/294
   systemd.user = {
