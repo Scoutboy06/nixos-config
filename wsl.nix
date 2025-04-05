@@ -2,6 +2,8 @@
 # FIXME: uncomment the next line if you want to reference your GitHub/GitLab access tokens and other secrets
 # secrets,
 username, hostname, pkgs, inputs, ... }: {
+  imports = [ ./modules/openssh.nix ];
+
   # FIXME: change to your tz! look it up with "timedatectl list-timezones"
   time.timeZone = "Europe/Stockholm";
 
@@ -34,17 +36,7 @@ username, hostname, pkgs, inputs, ... }: {
     # ];    
   };
 
-  home-manager.users.${username} = {
-    imports = [
-      #
-      ./home.nix
-      # ./modules/tmux.nix
-      # ./modules/fish.nix
-      # ./modules/helix.nix
-      # ./modules/starship.nix
-      # ./modules/git.nix
-    ];
-  };
+  home-manager.users.${username}.imports = [ ./home.nix ];
 
   system.stateVersion = "22.05";
 
@@ -60,11 +52,11 @@ username, hostname, pkgs, inputs, ... }: {
     # docker-desktop.enable = false;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    autoPrune.enable = true;
-  };
+  # virtualisation.docker = {
+  #   enable = true;
+  #   enableOnBoot = true;
+  #   autoPrune.enable = true;
+  # };
 
   # solution adapted from: https://github.com/K900/vscode-remote-workaround
   # more information: https://github.com/nix-community/NixOS-WSL/issues/238 and https://github.com/nix-community/NixOS-WSL/issues/294

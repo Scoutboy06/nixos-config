@@ -1,7 +1,6 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.helix = {
     enable = true;
-    # keymaps = { "insert.j" = { k = "normal_mode"; }; };
     settings = {
       theme = "custom_blue";
       editor = {
@@ -30,11 +29,11 @@
       {
         name = "ruby";
         scope = "source.ruby";
-        file-types = [ "rb" ];
-        language-servers = [ "bundle exec ruby-lsp" ];
+        file-types = [ "rb" "rake" "ru" ];
+        language-servers = [ "ruby-lsp" ];
         formatter = {
           command = "rubocop";
-          args = [ "--auto-correct" "--stdin" "%file%" ];
+          args = [ "-A" "--stdin" "%filepath%" ];
         };
         auto-format = true;
       }
@@ -51,6 +50,10 @@
         };
       }
     ];
+    languages.language-server.ruby-lsp = {
+      command = "ruby-lsp";
+      args = [ ];
+    };
     themes = {
       custom_blue = let
         # colors gathered from wallpaper

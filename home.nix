@@ -4,11 +4,10 @@
 ... }:
 let
   unstable-packages = with pkgs.unstable; [
-    # FIXME: select your core binaries that you walways want on the bleeding-edge
     coreutils
     curl
     git
-    htop
+    btop
     tree
     tree
     unzip
@@ -34,6 +33,8 @@ let
     cargo-expand
 
     # local dev stuff
+    lazygit
+    yazi
 
     # treesitter
     tree-sitter
@@ -59,11 +60,6 @@ in {
     ./modules/helix.nix
     ./modules/tmux.nix
     ./modules/starship.nix
-    # (builtins.path { path = ./modules/fish.nix; })
-    # (builtins.path { path = ./modules/git.nix; })
-    # (builtins.path { path = ./modules/helix.nix; })
-    # (builtins.path { path = ./modules/tmux.nix; })
-    # (builtins.path { path = ./modules/starship.nix; })
   ];
 
   home.stateVersion = "24.11"; # Please read the documentation before changing.

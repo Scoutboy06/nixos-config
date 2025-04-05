@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.git = {
     enable = true;
     package = pkgs.unstable.git;
@@ -11,6 +11,7 @@
     userEmail = "elias06wennerlund@gmail.com";
     userName = "Elias Wennerlund";
     extraConfig = {
+      init.defaultBranch = "main";
       # FIXME: uncomment the next lines if you wantt o be able to clone private https repos
       # url = {
       #   "https://oauth2:${secrets.github_token}@github.com" = {
