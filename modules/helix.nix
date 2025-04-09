@@ -24,7 +24,12 @@
         name = "html";
         scope = "text.html.basic";
         file-types = [ "html" "erb" ];
-        language-servers = [ "html-lsp" ];
+        auto-format = true;
+        language-servers = [
+          "vscode-langservers-extracted"
+          "emmet-ls"
+          "tailwindcss-language-server"
+        ];
       }
       {
         name = "ruby";
@@ -32,8 +37,8 @@
         file-types = [ "rb" "rake" "ru" ];
         language-servers = [ "ruby-lsp" ];
         formatter = {
-          command = "rubocop";
-          args = [ "-A" "--stdin" "%filepath%" ];
+          command = "${pkgs.rufo}/bin/rufo";
+          args = [ ];
         };
         auto-format = true;
       }
@@ -43,16 +48,32 @@
         file-types = [ "erb" ];
         injection-regex = ".*\\.erb";
         roots = [ "Gemfile" ];
-        language-servers = [ "bundle exec ruby-lsp" ];
+        auto-format = true;
+        language-servers = [
+          "ruby-lsp"
+          "vscode-langservers-extracted"
+          "emmet-ls"
+          "tailwindcss-language-server"
+        ];
         formatter = {
-          command = "erb-format";
+          command = "${pkgs.rubyPackages.erb-formatter}/bin&/erb-format";
           args = [ "--stdin" ];
         };
       }
     ];
-    languages.language-server.ruby-lsp = {
-      command = "ruby-lsp";
-      args = [ ];
+    languages.language-server = {
+      ruby-lsp = {
+        command = "ruby-lsp";
+        args = [ ];
+      };
+      tailwindcss-language-server = {
+        command = "tailwindcss-language-server";
+        args = [ "--stdio" ];
+      };
+      emmet-ls = {
+        command = "emmet-ls";
+        args = [ ];
+      };
     };
     themes = {
       custom_blue = let
